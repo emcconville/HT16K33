@@ -46,6 +46,8 @@ class EightByEight(object):
        [Mini Yellow](https://www.adafruit.com/products/871)
        - - -
     '''
+    
+    bus=0x00
     address=0x70
     
     DISPLAY_ADDRESS=0x80
@@ -54,14 +56,12 @@ class EightByEight(object):
     ROW_ADDRESS=range(0x00,0x0F,0x02)
     COLUMN_VALUES=[0x80,0x01,0x02,0x04,0x08,0x10,0x20,0x40]
     
-    def __init__(self,bus=0,**kwargs):
+    def __init__(self,**kwargs):
         if 'address' in kwargs:
             self.address = kwargs['address']
-        if 'brightness' in kwargs:
-            self.setBrightness(kwargs['brightness'])
-        if 'blink_rate' in kwargs:
-            self.setBlinkRate(kwargs['blink_rate'])
-        self.bus = SMBus(bus)
+        if 'bus' in kwargs:
+            self.bus = kwargs['bus']
+        self.bus = SMBus(self.bus)
     
     def alterSingleLED(self,x,y,action=None):
         '''
