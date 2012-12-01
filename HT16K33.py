@@ -208,18 +208,11 @@ class EightByEight(object):
         row_address=self.getRowAddressByIndex(row)
         value=0
         if isinstance(columns,list):
-            c = list(columns)
-            while len(c) < 8:
-                c.append(False)
-            for index in range(0,8):
-                if c[index]:
+            for index in columns:
+                if index:
                     value |= self.COLUMN_VALUES[index]
         elif isinstance(columns,int):
-            if columns > 0xFF :
-                columns = 0xFF
-            elif columns < 0x00 :
-                columns = 0x00
-            value = columns
+            value = columns % 0x100
         self.bus.write_byte_data(self.address, row_address, value)
         
     def setUp(self):

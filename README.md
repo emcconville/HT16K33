@@ -4,12 +4,12 @@ A simple python library to control products using the HT16K33 IC.
 
 **Currently supported**
 
- + [8x8 LED Matrix](http://adafruit.com/products/872) (_HT16K33.EightByEight_)
+ + [8x8 LED Matrix](http://adafruit.com/products/872) ( _HT16K33.EightByEight_ )
 
 **To Do**
 
- - [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) (_HT16K33.BiColor_)
- - [4 Digit 7-Segment Display](http://adafruit.com/products/878) (_HT16K33.FourDigit_)
+ - [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) ( _HT16K33.BiColor_ )
+ - [4 Digit 7-Segment Display](http://adafruit.com/products/878) ( _HT16K33.FourDigit_ )
 
 ## Dependencies
 
