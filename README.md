@@ -16,7 +16,7 @@ A simple python library to control products using the HT16K33 IC.
 The only dependency is Python's SMBus module; which, ships with Linux's [i2c-tools][1] development tools. 
 The module _SMBus_ opens a simple protocol to transport data between Linux OS and _any_ i2c integrated circuit.
 
-If HT16K33 library is unable to load the _SMBus_ module, then this library will genereate an internal dummy object
+If HT16K33 library is unable to load the _SMBus_ module, then this library will genereate an internal dummy object.
 Said dummy object will emulate **I/O** protocol, and dump actions/commands to **STDOUT**.
 
 ### Debain
@@ -59,6 +59,15 @@ Build and install python2's SMBus
 Connect i2c device, and identify address.
 
     $ i2cdetect -y 0
+         0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f                             
+    00:          -- -- -- -- -- -- -- -- -- -- -- -- --                             
+    10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
+    20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
+    30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
+    40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
+    50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
+    60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
+    70: 70 -- -- -- -- -- -- --  
 
 ### EightByEight
 
