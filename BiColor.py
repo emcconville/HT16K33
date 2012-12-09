@@ -18,7 +18,7 @@ class BiColor(_HT16K33.Base):
         byte &= ~new_byte
     else:
         byte = new_byte
-    self.bus.write_byte_data(self.address, row_address, byte)
+    self.bus.write_byte_data(self.address, column_address, byte)
     
   def getColumnAddressByIndex(self,column,red=False):
     column = int(column) % 0x08
@@ -30,17 +30,17 @@ class BiColor(_HT16K33.Base):
     value=int(value) % 0x100
     self.bus.write_byte_data(self.address,column_address,value)
   def turnOnGreenLED(self,x,y):
-    self.alterSingleLED(self.getColumnAddressByIndex(x,False),self.getRowValue(y),"or")
+    self.alterSingleLED(x,y,"or",False)
   def turnOffGreenLED(self,x,y):
-    self.alterSingleLED(self.getColumnAddressByIndex(x,False),self.getRowValue(y),"andnot")
+    self.alterSingleLED(x,y,"andnot",False)
   def toggleGreenLED(self,x,y):
-    self.alterSingleLED(self.getColumnAddressByIndex(x,False),self.getRowValue(y),"xor")
+    self.alterSingleLED(x,y,"xor",False)
   def turnOnRedLED(self,x,y):
-    self.alterSingleLED(self.getColumnAddressByIndex(x,True),self.getRowValue(y),"or")
+    self.alterSingleLED(x,y,"or",True)
   def turnOffRedLED(self,x,y):
-    self.alterSingleLED(self.getColumnAddressByIndex(x,True),self.getRowValue(y),"andnot")
+    self.alterSingleLED(x,y),"andnot",True)
   def toggleRedLED(self,x,y):
-    self.alterSingleLED(self.getColumnAddressByIndex(x,True),self.getRowValue(y),"xor")
+    self.alterSingleLED(x,y,"xor",True)
   def turnOffLED(self,x,y):
     self.turnOffGreenLED(x,y)
     self.turnOffRedLED(x,y)
