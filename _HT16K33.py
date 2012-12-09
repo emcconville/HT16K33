@@ -55,7 +55,7 @@ class Base(object):
          >>> bus.clear()  # doctest: +ELLIPSIS
          <...Base object at 0x...>
       '''
-      for i in range(0x0F):
+      for i in range(0x10):
           self.bus.write_byte_data(self.address, i, 0x00)
       return self
   
