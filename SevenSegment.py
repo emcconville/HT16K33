@@ -39,3 +39,10 @@ class SevenSegment(_HT16K33.Base):
     except KeyError:
       pass
     return integer
+  def readAtIndex(self,index=0):
+    self.bus.read_byte_data(self.address,self.getDigitAddressByIndex(index))
+  def turnOnColon(self):
+    self.bus.write_byte_data(self.address,self.COLON_ADDRESS,0xFF)
+  def turnOffColon(self):
+    self.bus.write_byte_data(self.address,self.COLON_ADDRESS,0x00)
+  
