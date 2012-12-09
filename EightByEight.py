@@ -27,7 +27,6 @@ class EightByEight(_HT16K33.Base):
            
            Example:
            >>> matrix = EightByEight().setUp()
-           >>> matrix.clear() # doctest: +SKIP
            >>> matrix.setRow(0,0b11110000)
            >>> matrix.alterSingleLED(4,0,"or")
            >>> matrix.alterSingleLED(4,0,"xor")
@@ -147,3 +146,8 @@ class EightByEight(_HT16K33.Base):
            >>> matrix.clear() #doctest: +SKIP
         '''
         return self.alterSingleLED(x,y,"xor")
+    
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
