@@ -10,6 +10,7 @@ except ImportError:
     \033[1;93m!\033[0;91m Switching to terminal emulation \033[1;93m!
     \033[1;93m!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\033[0m
     '''
+    import sys
     class SMBus(object):
         memory = {0:0, 2:0, 4:0, 6:0, 8:0, 10:0, 12:0, 14:0}
         debug = True
@@ -17,15 +18,12 @@ except ImportError:
             self.bus = bus
             self.debug =  __name__ != "__main__" 
         def write_byte(self,address,byte):
-            if self.debug:
-                print "[%d:0x%x] Writing byte 0x%x" % (self.bus,address,byte)
+            sys.stderr.write( "[%d:0x%x] Writing byte 0x%x\n" % (self.bus,address,byte) )
         def write_byte_data(self,address,byte,value):
             self.memory[byte] = value
-            if self.debug:
-                print "[%d:0x%x] Setting byte 0x%x value 0x%x [%s]" % (self.bus,address,byte,value,bin(value))
+            sys.stderr.write( "[%d:0x%x] Setting byte 0x%x value 0x%x [%s]\n" % (self.bus,address,byte,value,bin(value)) )
         def read_byte_data(self,address,byte):
-            if self.debug:
-                print "[%d:0x%x] Reading byte 0x%x value 0x%x [%s]" % (self.bus,address,byte,self.memory[byte],bin(self.memory[byte]))
+            sys.stderr.write( "[%d:0x%x] Reading byte 0x%x value 0x%x [%s]\n" % (self.bus,address,byte,self.memory[byte],bin(self.memory[byte])) )
             return self.memory[byte]
 
 class Base(object):
