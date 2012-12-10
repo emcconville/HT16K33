@@ -1,8 +1,8 @@
 import _HT16K33
 
-class SevenSegment(_HT16K33.Base):
+class FourDigit(_HT16K33.Base):
   '''
-     Four Seven-segment digit LED display for Adafruit's HT16K33 I2C backpack
+     Four seven-segment digit LED display for Adafruit's HT16K33 I2C backpack
      - - -
      [Blue](http://adafruit.com/products/881)
      [Green](http://adafruit.com/products/880)
@@ -44,7 +44,7 @@ class SevenSegment(_HT16K33.Base):
        - action   ("or","xor","andnot")
        
        Example:
-       >>> digit = SevenSegment().setUp()    # Set-up
+       >>> digit = FourDigit().setUp()    # Set-up
        >>> digit.setDigit(0,0x5B)            # Assign "2" character to first digit
        >>> digit.alterSingleLED(0,0x80,"or") # Alter first digit to include period
     '''
@@ -67,7 +67,7 @@ class SevenSegment(_HT16K33.Base):
       - index 
       
       Example:
-      >>> digit = SevenSegment()
+      >>> digit = FourDigit()
       >>> digit.getDigitAddressByIndex(1)
       2
     '''
@@ -85,7 +85,7 @@ class SevenSegment(_HT16K33.Base):
        - character (see CHARACTER_MAP)
        
        Example:
-       >>> digit = SevenSegment().setUp()
+       >>> digit = FourDigit().setUp()
        >>> digit.chrToInt(8)
        127
        >>> digit.chrToInt("T")
@@ -104,7 +104,7 @@ class SevenSegment(_HT16K33.Base):
        - index
        
        Example:
-       >>> digit = SevenSegment().setUp()
+       >>> digit = FourDigit().setUp()
        >>> digit.setDigit(0,0xFF)
        >>> digit.readAtIndex(0)
        255
@@ -118,7 +118,7 @@ class SevenSegment(_HT16K33.Base):
        - value
        
        Example:
-       >>> digit = SevenSegment().setUp()
+       >>> digit = FourDigit().setUp()
        >>> digit.setDigit(0,0x06) # 1
        >>> digit.setDigit(1,0x5B) # 2
        >>> digit.setDigit(2,0x4F) # 3
@@ -131,7 +131,7 @@ class SevenSegment(_HT16K33.Base):
        Enable colon symbol
        
        Example:
-       >>> digit = SevenSegment().setUp()
+       >>> digit = FourDigit().setUp()
        >>> digit.turnOnColon()
     '''
     self.bus.write_byte_data(self.address,self.COLON_ADDRESS,0xFF)
@@ -141,7 +141,7 @@ class SevenSegment(_HT16K33.Base):
        Disable colon symbol
        
        Example:
-       >>> digit = SevenSegment().setUp()
+       >>> digit = FourDigit().setUp()
        >>> digit.turnOffColon()
     '''
     self.bus.write_byte_data(self.address,self.COLON_ADDRESS,0x00)
@@ -163,7 +163,7 @@ class SevenSegment(_HT16K33.Base):
        Write single character to a given postion
        
        Example:
-       >>> digit = SevenSegment().setUp()
+       >>> digit = FourDigit().setUp()
        >>> for i in range(4):
        ...   digit.writeDigit(i,i)
     '''

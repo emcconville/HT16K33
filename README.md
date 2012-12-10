@@ -134,4 +134,35 @@ Cycle through all colors
       incr+=1
 ```
 
+### FourColor
+
+Display letters "a", "b", "c", & "d"
+
+```python
+    #!/bin/env python
+    
+    from HT16K33 import FourColor
+    
+    # Enable device
+    digit = FourColor().setUp()
+    
+    # Create characters
+    a = digit.TOP_BAR | digit.MIDDLE_BAR | 
+        digit.BOTTOM_BAR | digit.RIGHT_TOP_BAR | 
+        digit.RIGHT_BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
+    b = digit.MIDDLE_BAR | digit.BOTTOM_BAR |
+        digit.LEFT_TOP_BAR | digit.LEFT_BOTTOM_BAR |
+        digit.RIGHT_BOTTOM_BAR
+    c = digit.MIDDLE_BAR | digit.BOTTOM_BAR | digit.RIGHT_BOTTOM_BAR
+    d = digit.MIDDLE_BAR | digit.BOTTOM_BAR |
+        digit.RIGHT_TOP_BAR | digit.RIGHT_BOTTOM_BAR
+        digit.LEFT_BOTTOM_BAR
+    
+    # Assign custom built characters to device
+    digit.setDigit(0,a)
+    digit.setDigit(1,b)
+    digit.setDigit(2,c)
+    digit.setDigit(3,d)
+```
+
 [1]:(http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-3.1.0.tar.bz2)

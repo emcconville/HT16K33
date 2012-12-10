@@ -18,12 +18,12 @@ except ImportError:
             self.bus = bus
             self.debug =  __name__ != "__main__" 
         def write_byte(self,address,byte):
-            sys.stderr.write( "[%d:0x%x] Writing byte 0x%x\n" % (self.bus,address,byte) )
+            sys.stderr.write( "[%d:0x%0.2X] Writing byte 0x%0.2X\n" % (self.bus,address,byte) )
         def write_byte_data(self,address,byte,value):
             self.memory[byte] = value
-            sys.stderr.write( "[%d:0x%x] Setting byte 0x%x value 0x%x [%s]\n" % (self.bus,address,byte,value,bin(value)) )
+            sys.stderr.write( "[%d:0x%0.2X] Setting byte 0x%0.2X value 0x%0.2X [%s]\n" % (self.bus,address,byte,value,bin(value)) )
         def read_byte_data(self,address,byte):
-            sys.stderr.write( "[%d:0x%x] Reading byte 0x%x value 0x%x [%s]\n" % (self.bus,address,byte,self.memory[byte],bin(self.memory[byte])) )
+            sys.stderr.write( "[%d:0x%0.2X] Reading byte 0x%0.2X value 0x%0.2X [%s]\n" % (self.bus,address,byte,self.memory[byte],bin(self.memory[byte])) )
             return self.memory[byte]
 
 class Base(object):
@@ -31,7 +31,7 @@ class Base(object):
   bus=0x00
   address=0x70
   
-  VERSION = "0.0.1-dev"
+  VERSION = "0.0.1"
   
   DISPLAY_ADDRESS=0x80
   BRIGHTNESS_ADDRESS=0xE0
