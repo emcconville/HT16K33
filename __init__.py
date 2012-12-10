@@ -1,3 +1,3 @@
 from EightByEight import EightByEight
-from SevenSegment import SevenSegment
+from FourDigit import FourDigit
 from BiColor import BiColor

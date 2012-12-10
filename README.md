@@ -134,17 +134,17 @@ Cycle through all colors
       incr+=1
 ```
 
-### FourColor
+### FourDigit
 
 Display letters "a", "b", "c", & "d"
 
 ```python
     #!/bin/env python
     
-    from HT16K33 import FourColor
+    from HT16K33 import FourDigit
     
     # Enable device
-    digit = FourColor().setUp()
+    digit = FourDigit().setUp()
     
     # Create characters
     a = digit.TOP_BAR | digit.MIDDLE_BAR | 
