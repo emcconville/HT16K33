@@ -35,7 +35,7 @@ class SevenSegment(_HT16K33.Base):
   def chrToInt(self,character):
     integer=0x00
     try:
-      integer=self.CHARACTER_MAP[ord(str(character)]
+      integer=self.CHARACTER_MAP[ord(str(character))]
     except KeyError:
       pass
     return integer

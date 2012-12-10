@@ -5,10 +5,10 @@ A simple python library to control products using the HT16K33 IC.
 **Currently supported**
 
  + [8x8 LED Matrix](http://adafruit.com/products/872) ( _HT16K33.EightByEight_ )
+ + [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) ( _HT16K33.BiColor_ )
 
 **To Do**
 
- - [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) ( _HT16K33.BiColor_ )
  - [4 Digit 7-Segment Display](http://adafruit.com/products/878) ( _HT16K33.FourDigit_ )
 
 ## Dependencies
@@ -38,12 +38,12 @@ Download source & extract
     $ curl -O http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-3.1.0.tar.bz2
     $ tar jxvf i2c-tools-3.1.0.tar.bz2 && cd i2c-tools-3.1.0
 
-Compile core (update paths and C-flags as needed)
+Compile core _update paths and C-flags as needed_
 
     $ make 
     $ make install
 
-Compile eepromer (if needed)
+Compile eepromer _if needed_
 
     $ make -C eepromer
     $ install -Dm755 eepromer/eeprog eepromer/eeprom eepromer/eepromer /usr/sbin
@@ -74,7 +74,8 @@ Connect i2c device, and identify address.
 Draw a cross from corner to corner.
 
 ```python
-
+    #!/bin/env python
+    
     from HT16K33 import EightByEight
     import time
     
@@ -88,20 +89,49 @@ Draw a cross from corner to corner.
 Cycle through all levels of brightness.
 
 ```python
-
+    #!/bin/env python
+    
     from HT16K33 import EightByEight
     import time
     
-	# Enable device
+    # Enable device
     matrix=EightByEight(bus=0,address=0x70).setUp()
-	
-	# Turn on all LEDS
-	for row in range(0,8):
-	  matrix.setRow(row,0xFF)
+      
+    # Turn on all LEDS
+    for row in range(8):
+      matrix.setRow(row,0xFF)
     
-	# Adjust duty 
-	for duty in range(0,16):
-	  matrix.setBrightness(duty)
+    # Adjust duty 
+    for duty in range(16):
+      matrix.setBrightness(duty)
+```
+
+### BiColor Square
+
+Cycle through all colors
+
+```python
+    #!/bin/env python
+    
+    from HT16K33 import BiColor
+    
+    # Enable device
+    square=BiColor(bus=0,address=0x70).setUp()
+    incr=0
+    
+    # Alternate between green & red columns
+    for column in range(8):
+      isRed=bool(incr%2)
+      square.setColumn(column,0xFF,isRed)
+      incr+=1
+    
+    # Draw yellow across last row
+    for x in range(7,-1,-1):
+      if bool(incr%2):
+        square.turnOnRedLED(x,7)
+      else:
+        square.turnOnGreenLED(x,7)
+      incr+=1
 ```
 
 [1]:(http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-3.1.0.tar.bz2)
