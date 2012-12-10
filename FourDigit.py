@@ -11,14 +11,14 @@ class FourDigit(_HT16K33.Base):
      [White](http://adafruit.com/products/1002)
   '''
   
-  TOP_BAR = 0x01
-  MIDDLE_BAR = 0x40
-  BOTTOM_BAR = 0x08
-  LEFT_TOP_BAR = 0x20
-  LEFT_BOTTOM_BAR = 0x10
-  RIGHT_TOP_BAR = 0x02
-  RIGHT_BOTTM_BAR = 0x04
-  PERIOD = 0x80
+  TOP_BAR          = 0x01
+  MIDDLE_BAR       = 0x40
+  BOTTOM_BAR       = 0x08
+  LEFT_TOP_BAR     = 0x20
+  LEFT_BOTTOM_BAR  = 0x10
+  RIGHT_TOP_BAR    = 0x02
+  RIGHT_BOTTOM_BAR = 0x04
+  PERIOD           = 0x80
   
   DIGIT_ADDRESS = [0x00,0x02,0x06,0x08]
   COLON_ADDRESS = 0x04

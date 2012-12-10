@@ -147,14 +147,14 @@ Display letters "a", "b", "c", & "d"
     digit = FourDigit().setUp()
     
     # Create characters
-    a = digit.TOP_BAR | digit.MIDDLE_BAR | 
-        digit.BOTTOM_BAR | digit.RIGHT_TOP_BAR | 
+    a = digit.TOP_BAR | digit.MIDDLE_BAR | \
+        digit.BOTTOM_BAR | digit.RIGHT_TOP_BAR | \
         digit.RIGHT_BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
-    b = digit.MIDDLE_BAR | digit.BOTTOM_BAR |
-        digit.LEFT_TOP_BAR | digit.LEFT_BOTTOM_BAR |
+    b = digit.MIDDLE_BAR | digit.BOTTOM_BAR | \
+        digit.LEFT_TOP_BAR | digit.LEFT_BOTTOM_BAR | \
         digit.RIGHT_BOTTOM_BAR
-    c = digit.MIDDLE_BAR | digit.BOTTOM_BAR | digit.RIGHT_BOTTOM_BAR
-    d = digit.MIDDLE_BAR | digit.BOTTOM_BAR |
+    c = digit.MIDDLE_BAR | digit.BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
+    d = digit.MIDDLE_BAR | digit.BOTTOM_BAR | \
         digit.RIGHT_TOP_BAR | digit.RIGHT_BOTTOM_BAR
         digit.LEFT_BOTTOM_BAR
     
