@@ -2,14 +2,9 @@
 
 A simple python library to control products using the HT16K33 IC.
 
-**Currently supported**
-
- + [8x8 LED Matrix](http://adafruit.com/products/872) ( _HT16K33.EightByEight_ )
  + [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) ( _HT16K33.BiColor_ )
-
-**To Do**
-
- - [4 Digit 7-Segment Display](http://adafruit.com/products/878) ( _HT16K33.FourDigit_ )
+ + [8x8 LED Matrix](http://adafruit.com/products/872) ( _HT16K33.EightByEight_ )
+ + [4 Digit 7-Segment Display](http://adafruit.com/products/878) ( _HT16K33.FourDigit_ )
 
 ## Dependencies
 
@@ -68,13 +63,39 @@ Connect i2c device, and identify address.
     50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
     60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
     70: 70 -- -- -- -- -- -- --  
+    
+### Base Object ###
 
-### EightByEight
+Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use.
 
-Draw a cross from corner to corner.
+#### Methods ####
+
+**\_\_init\_\_(\*\*kwargs)**
+**clear()**
+**setBrightness(brightness=0x0F)**
+**setDisplay(on=True,blink_rate=0x00)**
+**setUp()**
+**turnOnOscillator()**
+**turnOffOscillator()**
+
+### EightByEight ###
+
+#### Methods ####
+
+**alterSingleLED(x,y,action=None)**
+**getRowAddressByIndex(row)**
+**setRow(row=0,columns=[])**
+**turnOnLED(x,y)**
+**turnOffLED(x,y)**
+**toggleLED(x,y)**
+
+
+#### Examples ####
 
 ```python
+
     #!/bin/env python
+    # Draw a cross from corner to corner.
     
     from HT16K33 import EightByEight
     import time
@@ -86,10 +107,10 @@ Draw a cross from corner to corner.
       time.sleep(0.25)
 ```
 
-Cycle through all levels of brightness.
-
 ```python
+
     #!/bin/env python
+    # Cycle through all levels of brightness
     
     from HT16K33 import EightByEight
     import time
@@ -106,12 +127,29 @@ Cycle through all levels of brightness.
       matrix.setBrightness(duty)
 ```
 
-### BiColor Square
+### BiColor Square ###
 
-Cycle through all colors
+#### Methods ####
+
+**alterSingleLED(x,y,action,isRed=False)**
+**getColumnAddressByIndex(column,isRed=False)**
+**getRowValue(position=0x00)**
+**setColumn(column=0,value=0x00,isRed=False)**
+**turnOnGreenLED(x,y)**
+**turnOffGreenLED(x,y)**
+**toggleGreenLED(x,y)**
+**turnOnRedLED(x,y)**
+**turnOffRedLED(x,y)**
+**toggleRedLED(x,y)**
+**turnOffLED(x,y)**
+
+#### Examples ####
 
 ```python
+
     #!/bin/env python
+    # Cycle through red & green colors, and render 
+    # yellow line across last row
     
     from HT16K33 import BiColor
     
@@ -134,12 +172,26 @@ Cycle through all colors
       incr+=1
 ```
 
-### FourDigit
+### FourDigit ###
 
-Display letters "a", "b", "c", & "d"
+#### Methods ####
+
+**alterSingleLED(position=0,new_byte=0x00,action=None)**
+**getDigitAddressByIndex(index=0)**
+**chrToInt(character)**
+**readAtIndex(index=0)**
+**setDigit(position=0,value=0x00)**
+**turnOnColon()**
+**turnOffColon()**
+**turnOffPeriodAtPosition(position=0)**
+**writeDigit(position,char=None)**
+
+#### Example ####
 
 ```python
+
     #!/bin/env python
+    # Create letters "a", "b", "c", & "d" across all for digits displays
     
     from HT16K33 import FourDigit
     
@@ -155,7 +207,7 @@ Display letters "a", "b", "c", & "d"
         digit.RIGHT_BOTTOM_BAR
     c = digit.MIDDLE_BAR | digit.BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
     d = digit.MIDDLE_BAR | digit.BOTTOM_BAR | \
-        digit.RIGHT_TOP_BAR | digit.RIGHT_BOTTOM_BAR
+        digit.RIGHT_TOP_BAR | digit.RIGHT_BOTTOM_BAR | \
         digit.LEFT_BOTTOM_BAR
     
     # Assign custom built characters to device
