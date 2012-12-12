@@ -49,7 +49,7 @@ class FourDigit(_HT16K33.Base):
        >>> digit.alterSingleLED(0,0x80,"or") # Alter first digit to include period
     '''
     position=int(position) % 4
-    digit_address = self.getDigitAddressByIndex(position)
+    digit_address = self.getDigitAddressAtPosition(position)
     byte = self.bus.read_byte_data(self.address,digit_address)
     if action == "or":
         byte |= new_byte
@@ -61,17 +61,17 @@ class FourDigit(_HT16K33.Base):
         byte = new_byte
     self.bus.write_byte_data(self.address, digit_address, byte)
   
-  def getDigitAddressByIndex(self,index=0):
+  def getDigitAddressAtPosition(self,position=0):
     '''
       Retrive address by position
-      - index 
+      - position (0..3) 
       
       Example:
       >>> digit = FourDigit()
-      >>> digit.getDigitAddressByIndex(1)
+      >>> digit.getDigitAddressAtPosition(1)
       2
     '''
-    return self.DIGIT_ADDRESS[int(index) % len(self.DIGIT_ADDRESS)]
+    return self.DIGIT_ADDRESS[int(position) % len(self.DIGIT_ADDRESS)]
   
   def chrToInt(self,character):
     '''
@@ -98,18 +98,18 @@ class FourDigit(_HT16K33.Base):
       pass
     return integer
   
-  def readAtIndex(self,index=0):
+  def readAtPosition(self,position=0):
     '''
        Return LED value currently in devices EEPROM
-       - index
+       - position (0..3)
        
        Example:
        >>> digit = FourDigit().setUp()
        >>> digit.setDigit(0,0xFF)
-       >>> digit.readAtIndex(0)
+       >>> digit.readAtPosition(0)
        255
     '''
-    return self.bus.read_byte_data(self.address,self.getDigitAddressByIndex(index))
+    return self.bus.read_byte_data(self.address,self.getDigitAddressAtPosition(position))
   
   def setDigit(self,position=0,value=0x00):
     '''
@@ -124,7 +124,7 @@ class FourDigit(_HT16K33.Base):
        >>> digit.setDigit(2,0x4F) # 3
        >>> digit.setDigit(3,0x66) # 4
     '''
-    self.bus.write_byte_data(self.address,self.getDigitAddressByIndex(position),int(value) % 0x100)
+    self.bus.write_byte_data(self.address,self.getDigitAddressAtPosition(position),int(value) % 0x100)
   
   def turnOnColon(self):
     '''
