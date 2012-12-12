@@ -2,9 +2,10 @@
 
 A simple python library to control products using the HT16K33 IC.
 
- + [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) ( _HT16K33.BiColor_ )
- + [8x8 LED Matrix](http://adafruit.com/products/872) ( _HT16K33.EightByEight_ )
- + [4 Digit 7-Segment Display](http://adafruit.com/products/878) ( _HT16K33.FourDigit_ )
+ + Adafruit's LED backpacks
+   + [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) - [HT16K33.BiColor](#bicolor-square)
+   + [8x8 LED Matrix](http://adafruit.com/products/872) - [HT16K33.EightByEight](#eightbyeight)
+   + [4 Digit 7-Segment Display](http://adafruit.com/products/878) - [HT16K33.FourDigit](#fourdigit)
 
 ## Dependencies
 
@@ -123,6 +124,43 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
 
 ### EightByEight ###
 
+#### Examples ####
+
+```python
+
+    #!/bin/env python
+    # Draw a cross from corner to corner.
+    
+    from HT16K33 import EightByEight
+    import time
+    
+    matrix=EightByEight(bus=0,address=0x70).setUp()
+    for i in range(0,8):
+      matrix.turnOnLED(i,i)
+      matrix.turnOnLED(7-i,i)
+      time.sleep(0.25)
+```
+
+```python
+
+    #!/bin/env python
+    # Cycle through all levels of brightness
+    
+    from HT16K33 import EightByEight
+    import time
+    
+    # Enable device
+    matrix=EightByEight(bus=0,address=0x70).setUp()
+      
+    # Turn on all LEDS
+    for row in range(8):
+      matrix.setRow(row,0xFF)
+    
+    # Adjust duty 
+    for duty in range(16):
+      matrix.setBrightness(duty)
+```
+
 #### Methods ####
 
     class EightByEight(_HT16K33.Base)
@@ -171,45 +209,37 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
      |      
 
 
+### BiColor Square ###
+
 #### Examples ####
 
 ```python
 
     #!/bin/env python
-    # Draw a cross from corner to corner.
+    # Cycle through red & green colors, and render 
+    # yellow line across last row
     
-    from HT16K33 import EightByEight
-    import time
-    
-    matrix=EightByEight(bus=0,address=0x70).setUp()
-    for i in range(0,8):
-      matrix.turnOnLED(i,i)
-      matrix.turnOnLED(7-i,i)
-      time.sleep(0.25)
-```
-
-```python
-
-    #!/bin/env python
-    # Cycle through all levels of brightness
-    
-    from HT16K33 import EightByEight
-    import time
+    from HT16K33 import BiColor
     
     # Enable device
-    matrix=EightByEight(bus=0,address=0x70).setUp()
-      
-    # Turn on all LEDS
-    for row in range(8):
-      matrix.setRow(row,0xFF)
+    square=BiColor(bus=0,address=0x70).setUp()
+    incr=0
     
-    # Adjust duty 
-    for duty in range(16):
-      matrix.setBrightness(duty)
+    # Alternate between green & red columns
+    for column in range(8):
+      isRed=bool(incr%2)
+      square.setColumn(column,0xFF,isRed)
+      incr+=1
+    
+    # Draw yellow across last row
+    for x in range(7,-1,-1):
+      if bool(incr%2):
+        square.turnOnRedLED(x,7)
+      else:
+        square.turnOnGreenLED(x,7)
+      incr+=1
 ```
-
-### BiColor Square ###
-
+ 
 #### Methods ####
 
     class BiColor(_HT16K33.Base)
@@ -278,36 +308,38 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
      |      - x (0..7)
      |      - y (0..7)
 
-#### Examples ####
+### FourDigit ###
+
+#### Example ####
 
 ```python
 
     #!/bin/env python
-    # Cycle through red & green colors, and render 
-    # yellow line across last row
+    # Create letters "a", "b", "c", & "d" across all for digits displays
     
-    from HT16K33 import BiColor
+    from HT16K33 import FourDigit
     
     # Enable device
-    square=BiColor(bus=0,address=0x70).setUp()
-    incr=0
+    digit = FourDigit().setUp()
     
-    # Alternate between green & red columns
-    for column in range(8):
-      isRed=bool(incr%2)
-      square.setColumn(column,0xFF,isRed)
-      incr+=1
+    # Create characters
+    a = digit.TOP_BAR | digit.MIDDLE_BAR | \
+        digit.BOTTOM_BAR | digit.RIGHT_TOP_BAR | \
+        digit.RIGHT_BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
+    b = digit.MIDDLE_BAR | digit.BOTTOM_BAR | \
+        digit.LEFT_TOP_BAR | digit.LEFT_BOTTOM_BAR | \
+        digit.RIGHT_BOTTOM_BAR
+    c = digit.MIDDLE_BAR | digit.BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
+    d = digit.MIDDLE_BAR | digit.BOTTOM_BAR | \
+        digit.RIGHT_TOP_BAR | digit.RIGHT_BOTTOM_BAR | \
+        digit.LEFT_BOTTOM_BAR
     
-    # Draw yellow across last row
-    for x in range(7,-1,-1):
-      if bool(incr%2):
-        square.turnOnRedLED(x,7)
-      else:
-        square.turnOnGreenLED(x,7)
-      incr+=1
+    # Assign custom built characters to device
+    digit.setDigit(0,a)
+    digit.setDigit(1,b)
+    digit.setDigit(2,c)
+    digit.setDigit(3,d)
 ```
-
-### FourDigit ###
 
 #### Methods ####
 
@@ -364,35 +396,5 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
      |      Write single character to a given postion
      
 
-#### Example ####
-
-```python
-
-    #!/bin/env python
-    # Create letters "a", "b", "c", & "d" across all for digits displays
-    
-    from HT16K33 import FourDigit
-    
-    # Enable device
-    digit = FourDigit().setUp()
-    
-    # Create characters
-    a = digit.TOP_BAR | digit.MIDDLE_BAR | \
-        digit.BOTTOM_BAR | digit.RIGHT_TOP_BAR | \
-        digit.RIGHT_BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
-    b = digit.MIDDLE_BAR | digit.BOTTOM_BAR | \
-        digit.LEFT_TOP_BAR | digit.LEFT_BOTTOM_BAR | \
-        digit.RIGHT_BOTTOM_BAR
-    c = digit.MIDDLE_BAR | digit.BOTTOM_BAR | digit.LEFT_BOTTOM_BAR
-    d = digit.MIDDLE_BAR | digit.BOTTOM_BAR | \
-        digit.RIGHT_TOP_BAR | digit.RIGHT_BOTTOM_BAR | \
-        digit.LEFT_BOTTOM_BAR
-    
-    # Assign custom built characters to device
-    digit.setDigit(0,a)
-    digit.setDigit(1,b)
-    digit.setDigit(2,c)
-    digit.setDigit(3,d)
-```
 
 [1]:(http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-3.1.0.tar.bz2)
