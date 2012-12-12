@@ -70,24 +70,105 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
 
 #### Methods ####
 
-**\_\_init\_\_(\*\*kwargs)**
-**clear()**
-**setBrightness(brightness=0x0F)**
-**setDisplay(on=True,blink_rate=0x00)**
-**setUp()**
-**turnOnOscillator()**
-**turnOffOscillator()**
+    class Base(__builtin__.object)
+     |  Methods defined here:
+     |  
+     |  __init__(self, **kwargs)
+     |  
+     |  clear(self)
+     |      Loop through all data addresses, and clear any LEDS
+     |  
+     |  setBrightness(self, brightness=15)
+     |      Set brightness level
+     |      - brightness (0..15)
+     |      --  0 =  1/16 duty
+     |      --  1 =  2/16 duty
+     |      --  2 =  3/16 duty
+     |      --  3 =  4/16 duty
+     |      --  4 =  5/16 duty
+     |      --  5 =  6/16 duty
+     |      --  6 =  7/16 duty
+     |      --  7 =  8/16 duty
+     |      --  8 =  9/16 duty
+     |      --  9 = 10/16 duty
+     |      -- 10 = 11/16 duty
+     |      -- 11 = 12/16 duty
+     |      -- 12 = 13/16 duty
+     |      -- 13 = 14/16 duty
+     |      -- 14 = 15/16 duty
+     |      -- 15 = 16/16 duty
+     |  
+     |  setDisplay(self, on=True, blink_rate=0)
+     |      Set display options
+     |      - on (Boolean)
+     |      - blink_rate (0..3)
+     |      -- 0 = Blink off
+     |      -- 1 = 2HZ
+     |      -- 2 = 1HZ
+     |      -- 3 = 0.5HZ
+     |  
+     |  setUp(self)
+     |      Clear & set default state of HT16K33 internal systems
+     |        
+     |      - Blink disabled
+     |      - Brightness 8/16 duty (half-dim)
+     |      - All LEDS off
+     |  
+     |  turnOffOscillator(self)
+     |      Disable HT16K33 internal system oscillator
+     |  
+     |  turnOnOscillator(self)
+     |      Enable HT16K33 internal system oscillator
+     |        
 
 ### EightByEight ###
 
 #### Methods ####
 
-**alterSingleLED(x,y,action=None)**
-**getRowAddressByIndex(row)**
-**setRow(row=0,columns=[])**
-**turnOnLED(x,y)**
-**turnOffLED(x,y)**
-**toggleLED(x,y)**
+    class EightByEight(_HT16K33.Base)
+     |  
+     |  Method resolution order:
+     |      EightByEight
+     |      _HT16K33.Base
+     |      __builtin__.object
+     |  
+     |  Methods defined here:
+     |  
+     |  alterSingleLED(self, x, y, action=None)
+     |      Manipulate single lead at point (x,y)
+     |      - x = Column (0..7)
+     |      - y = Row (0..7)
+     |      - action = ("or","xor","andnot")
+     |  
+     |  getRowAddressByIndex(self, row)
+     |      Retrieve address of row by index. 
+     |      - row (0..7)
+     |  
+     |  setRow(self, row=0, columns=[])
+     |      Set LED status
+     |      - row (0..7)
+     |      - columns (mixed)
+     |      -- 8 item list of booleans
+     |      -- Unsigned integer
+     |      --- 0..255
+     |      --- 0x00..0xFF
+     |      --- 0b00000000...0b11111111
+     |      
+     |  toggleLED(self, x, y)
+     |      Toggle off/on single LED at x,y
+     |      - x = Column (0..7)
+     |      - y = Row (0..7)
+     |  
+     |  turnOffLED(self, x, y)
+     |      Turn off single LED at x,y
+     |      - x = Column (0..7)
+     |      - y = Row (0..7)
+     |      
+     |  turnOnLED(self, x, y)
+     |      Turn on single LED at x,y
+     |      - x = Column (0..7)
+     |      - y = Row (0..7)
+     |      
 
 
 #### Examples ####
@@ -131,17 +212,71 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
 
 #### Methods ####
 
-**alterSingleLED(x,y,action,isRed=False)**
-**getColumnAddressByIndex(column,isRed=False)**
-**getRowValue(position=0x00)**
-**setColumn(column=0,value=0x00,isRed=False)**
-**turnOnGreenLED(x,y)**
-**turnOffGreenLED(x,y)**
-**toggleGreenLED(x,y)**
-**turnOnRedLED(x,y)**
-**turnOffRedLED(x,y)**
-**toggleRedLED(x,y)**
-**turnOffLED(x,y)**
+    class BiColor(_HT16K33.Base)
+     |  Method resolution order:
+     |      BiColor
+     |      _HT16K33.Base
+     |      __builtin__.object
+     |  
+     |  Methods defined here:
+     |  
+     |  alterSingleLED(self, x, y, action, isRed=False)
+     |      Manipulate single lead at point (x,y)
+     |      - x = Column (0..7)
+     |      - y = Row (0..7)
+     |      - action = ("or","xor","andnot")
+     |      - isRed = (Boolean, default=False)
+     |  
+     |  getColumnAddressByIndex(self, column, isRed=False)
+     |      Retrieve column address based on index & color
+     |      - column (0..7)
+     |      - isRed (Boolean, default=False)
+     |  
+     |  getRowValue(self, position=0)
+     |      Retrieve value of row position
+     |      - position (0..7)
+     |  
+     |  setColumn(self, column=0, value=0, isRed=False)
+     |      Assign all LEDs in a given column
+     |      
+     |      - column (0..7)
+     |      - value (0x00..0xFF)
+     |      - isRed (Boolean, default=False)
+     |  
+     |  toggleGreenLED(self, x, y)
+     |      Toggle single green LED at x,y
+     |      - x (0..7)
+     |      - y (0..7)
+     |  
+     |  toggleRedLED(self, x, y)
+     |      Toogle single red LED at x,y
+     |      - x (0..7)
+     |      - y (0..7)
+     |  
+     |  turnOffGreenLED(self, x, y)
+     |      Turn off single green LED at x,y
+     |      - x (0..7)
+     |      - y (0..7)
+     |  
+     |  turnOffLED(self, x, y)
+     |      Turn off both green & red LEDs at point x,y
+     |      - x (0..7)
+     |      - y (0..7)
+     |  
+     |  turnOffRedLED(self, x, y)
+     |      Turn off single red LED at x,y
+     |      - x (0..7)
+     |      - y (0..7)
+     |  
+     |  turnOnGreenLED(self, x, y)
+     |      Turn on single green LED at x,y
+     |      - x (0..7)
+     |      - y (0..7)
+     |  
+     |  turnOnRedLED(self, x, y)
+     |      Turn on single red LED at x,y
+     |      - x (0..7)
+     |      - y (0..7)
 
 #### Examples ####
 
@@ -176,15 +311,58 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
 
 #### Methods ####
 
-**alterSingleLED(position=0,new_byte=0x00,action=None)**
-**getDigitAddressByIndex(index=0)**
-**chrToInt(character)**
-**readAtIndex(index=0)**
-**setDigit(position=0,value=0x00)**
-**turnOnColon()**
-**turnOffColon()**
-**turnOffPeriodAtPosition(position=0)**
-**writeDigit(position,char=None)**
+    class FourDigit(_HT16K33.Base)
+     | 
+     |  Method resolution order:
+     |      FourDigit
+     |      _HT16K33.Base
+     |      __builtin__.object
+     |
+     |  Methods defined here:
+     |
+     |  alterSingleLED(self, position=0, new_byte=0, action=None)
+     |      Manipulate single LED in character position
+     |      - position (0..3)
+     |      - new_byte (0..0xFF)
+     |      - action   ("or","xor","andnot")
+     |
+     |  chrToInt(self, character)
+     |      Convert character to LED display integer
+     |      
+     |      Each available character will have the LED display
+     |      integer assigned to the CHARACTER_MAP key matching
+     |      character's order. Any character not present in 
+     |      CHARACTER_MAP will return 0x00 (clear LED integer.)
+     |      
+     |      - character (see CHARACTER_MAP)
+     |
+     |  getDigitAddressAtPosition(self, position=0)
+     |      Retrive address by position
+     |      - position (0..3)
+     | 
+     |  readAtPosition(self, position=0)
+     |      Return LED value currently in devices EEPROM
+     |      - position (0..3)
+     |
+     |  setDigit(self, position=0, value=0)
+     |      Assign LED display to digit
+     |      - position
+     |      - value
+     |
+     |  turnOffColon(self)
+     |      Disable colon symbol
+     |
+     |  turnOffPeriodAtPosition(self, position=0)
+     |      Disable period symbol at given position
+     |  turnOnColon(self)
+     |      Enable colon symbol
+     |  
+     |  turnOnPeriodAtPosition(self, position=0)
+     |      Enable period symbol at given position
+     |
+     |  writeDigit(self, position, char=None)
+     |      Write single character to a given postion
+     
 
 #### Example ####
 

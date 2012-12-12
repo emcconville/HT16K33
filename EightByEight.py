@@ -49,9 +49,8 @@ class EightByEight(_HT16K33.Base):
     
     def getRowAddressByIndex(self,row):
         '''
-           Retrieve address of row by index. Expects int 0 through 7 
-           
-           Row index out of range will return address matching modulus.
+           Retrieve address of row by index.
+           - row (0..7)
            
            Example:
            >>> EightByEight().getRowAddressByIndex(0x06)
@@ -62,14 +61,13 @@ class EightByEight(_HT16K33.Base):
     def setRow(self,row=0,columns=[]):
         '''
            Set LED status
-           
-           Expected row (0..7)
-           Expected columns
-           - 8 item list of booleans
-           - Unsigned intager
-           -- 0..255
-           -- 0x00..0xFF
-           -- 0b00000000...0b11111111
+           - row (0..7)
+           - columns (mixed)
+           -- 8 item list of booleans
+           -- Unsigned intager
+           --- 0..255
+           --- 0x00..0xFF
+           --- 0b00000000...0b11111111
            
            Example:
            - Display the following image

@@ -60,22 +60,23 @@ class Base(object):
   def setBrightness(self,brightness=0x0F):
       '''
          Set brightness level
-         -  0 =  1/16 duty
-         -  1 =  2/16 duty
-         -  2 =  3/16 duty
-         -  3 =  4/16 duty
-         -  4 =  5/16 duty
-         -  5 =  6/16 duty
-         -  6 =  7/16 duty
-         -  7 =  8/16 duty
-         -  8 =  9/16 duty
-         -  9 = 10/16 duty
-         - 10 = 11/16 duty
-         - 11 = 12/16 duty
-         - 12 = 13/16 duty
-         - 13 = 14/16 duty
-         - 14 = 15/16 duty
-         - 15 = 16/16 duty
+         - brightness (0..15)
+         --  0 =  1/16 duty
+         --  1 =  2/16 duty
+         --  2 =  3/16 duty
+         --  3 =  4/16 duty
+         --  4 =  5/16 duty
+         --  5 =  6/16 duty
+         --  6 =  7/16 duty
+         --  7 =  8/16 duty
+         --  8 =  9/16 duty
+         --  9 = 10/16 duty
+         -- 10 = 11/16 duty
+         -- 11 = 12/16 duty
+         -- 12 = 13/16 duty
+         -- 13 = 14/16 duty
+         -- 14 = 15/16 duty
+         -- 15 = 16/16 duty
          
          Example:
          >>> bus = Base()
@@ -89,18 +90,12 @@ class Base(object):
   def setDisplay(self,on=True,blink_rate=0x00):
       '''
          Set display options
-           
-         Apply system oscillator to LEDs.
-           
-         Expected `on`
-         - False = Off
-         - True = On
-           
-         Expected `blink_rate`
-         - 0 = Blink off
-         - 1 = 2HZ
-         - 2 = 1HZ
-         - 3 = 0.5HZ
+         - on (Boolean)
+         - blink_rate (0..3)
+         -- 0 = Blink off
+         -- 1 = 2HZ
+         -- 2 = 1HZ
+         -- 3 = 0.5HZ
            
          Example:
          >>> bus = Base()
