@@ -107,22 +107,28 @@ class Base(object):
       self.bus.write_byte( self.address, self.DISPLAY_ADDRESS | (blink_rate << 0x01) | on )
       return self
   
-  def setUp(self):
-      '''
-         Clear & set default state of HT16K33 internal systems
-           
-         - Blink disabled
-         - Brightness 8/16 duty (half-dim)
-         - All LEDS off
-           
-         Example:
-         >>> bus = Base().setUp()
-      '''
-      self.clear() # Clear out manufacturer's test message
-      self.turnOnOscillator() # Start internal oscillator
-      self.setDisplay() # Enable display with no blink rates
-      self.setBrightness(0x07) # Default to 8/16 brightness
-      return self
+  def setUp(self,**kwargs):
+    _defaults = {
+      "display_on" : True, # Enable display
+      "blink_rate" : 0x00, # Disable blink rate
+      "brightness" : 0x07  # Default brightness to 8/16th duty
+    }
+    args = dict(_defaults.items() + kwargs.items())
+    '''
+       Clear & set default state of HT16K33 internal systems
+       KeyWords:
+       - display_on (Boolean, default True)
+       - blink_rate (0x00..0x03, default 0x00)
+       - brightness (0x00..0x0F, default 0x07)
+       
+       Example:
+       >>> bus = Base().setUp()
+    '''
+    self.clear() # Clear out manufacturer's test message
+    self.turnOnOscillator() # Start internal oscillator
+    self.setDisplay(args["display_on"],args["blink_rate"])
+    self.setBrightness(args["brightness"])
+    return self
         
   def turnOnOscillator(self):
       '''

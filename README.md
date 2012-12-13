@@ -108,12 +108,12 @@ Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use
      |      -- 2 = 1HZ
      |      -- 3 = 0.5HZ
      |  
-     |  setUp(self)
+     |  setUp(self,**kwargs)
      |      Clear & set default state of HT16K33 internal systems
-     |        
-     |      - Blink disabled
-     |      - Brightness 8/16 duty (half-dim)
-     |      - All LEDS off
+     |      KeyWords:
+     |      - display_on (Boolean, default True)
+     |      - blink_rate (0x00..0x03, default 0x00)
+     |      - brightness (0x00..0x0F, default 0x07)
      |  
      |  turnOffOscillator(self)
      |      Disable HT16K33 internal system oscillator
