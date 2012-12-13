@@ -18,12 +18,14 @@ while True: # Forever loop
     
     # Loop through characters and keep index
     for index,item in enumerate(list(display_digit)):
+      
       # Don't display "0" for first character
-      if index == 0 and item != 0:
+      if index == 0 and item != "0":
         digit.writeDigit(index,item)
       # Else (if not first character) write to device
       elif index != 0:
         digit.writeDigit(index,item)
+    
     # Blink colon for a second
     digit.turnOffColon()
     time.sleep(1)
