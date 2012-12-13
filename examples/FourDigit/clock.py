@@ -11,14 +11,20 @@ digit = FourDigit(bus=0,address=0x70).setUp()
 
 # Inform user of running process
 print "Starting HT16K33.FourDigit clock...(Ctl-C to quit)"
-while True:
+while True: # Forever loop
   try:
+    # Get string of 24-hour time
     display_digit = time.strftime("%H%M")
+    
+    # Loop through characters and keep index
     for index,item in enumerate(list(display_digit)):
+      # Don't display "0" for first character
       if index == 0 and item != 0:
         digit.writeDigit(index,item)
+      # Else (if not first character) write to device
       elif index != 0:
         digit.writeDigit(index,item)
+    # Blink colon for a second
     digit.turnOffColon()
     time.sleep(1)
     digit.turnOnColon()
