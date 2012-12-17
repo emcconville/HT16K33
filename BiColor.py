@@ -1,6 +1,6 @@
 import _HT16K33
 
-class BiColor(_HT16K33.Base):
+class BiColor(_HT16K33.Device):
   '''
      BiColor 8x8 Matrix with Adafruit's I2C Backpack
      [Bicolor LED Square](https://www.adafruit.com/products/902)

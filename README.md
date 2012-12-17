@@ -12,12 +12,12 @@ A simple python library to control products using the HT16K33 IC.
 The only dependency is Python's SMBus module; which, ships with Linux's [i2c-tools][1] development tools. 
 The module _SMBus_ opens a simple protocol to transport data between Linux OS and _any_ i2c integrated circuit.
 
-If HT16K33 library is unable to load the _SMBus_ module, then this library will genereate an internal dummy object.
+If HT16K33 library is unable to load the _SMBus_ module, then this library will generate an internal dummy object.
 Said dummy object will emulate **I/O** protocol, and dump actions/commands to **STDOUT**.
 
-### Debain
+### Debian
 
-_SMBus_ is isolated in a seprate package on Debain/Ubuntu. Be sure _python-smbus_ is installed
+_SMBus_ is isolated in a separate package on Debian/Ubuntu. Be sure _python-smbus_ is installed
 
     $ sudo apt-get install i2c-tools python-smbus
 
@@ -65,13 +65,13 @@ Connect i2c device, and identify address.
     60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --                             
     70: 70 -- -- -- -- -- -- --  
     
-### Base Object ###
+### Device Object ###
 
-Parent object inhertied by all HT16K33 LED backpacks. Not inteded for direct use.
+Parent object inherited by all HT16K33 LED backpacks. Not intended for direct use.
 
 #### Methods ####
 
-    class Base(__builtin__.object)
+    class Device(__builtin__.object)
      |  Methods defined here:
      |  
      |  __init__(self, **kwargs)

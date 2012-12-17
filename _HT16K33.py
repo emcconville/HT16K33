@@ -26,7 +26,7 @@ except ImportError:
             sys.stderr.write( "[%d:0x%0.2X] Reading byte 0x%0.2X value 0x%0.2X [%s]\n" % (self.bus,address,byte,self.memory[byte],bin(self.memory[byte])) )
             return self.memory[byte]
 
-class Base(object):
+class Device(object):
   
   bus=0x00
   address=0x70
