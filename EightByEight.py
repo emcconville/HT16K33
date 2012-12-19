@@ -1,5 +1,5 @@
 import _HT16K33
-class EightByEight(_HT16K33.Base):
+class EightByEight(_HT16K33.Device):
     '''
        8x8 LED matrix for Adafruit's HT16K33 LED backpack
        - - -

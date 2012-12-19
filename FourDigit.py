@@ -1,6 +1,6 @@
 import _HT16K33
 
-class FourDigit(_HT16K33.Base):
+class FourDigit(_HT16K33.Device):
   '''
      Four seven-segment digit LED display for Adafruit's HT16K33 I2C backpack
      - - -
