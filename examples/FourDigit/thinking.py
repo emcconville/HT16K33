@@ -3,14 +3,16 @@
 # FourDigit - Thinking
 # Indicate to user that the computer is working
 
-from HT16K33 import FourDigit
+from __future__ import print_function
 import time
+
+from .HT16K33 import FourDigit
 
 # Enable device
 digit = FourDigit(bus=0,address=0x70).setUp()
 
 # Tell operator process has started
-print "Starting HT16K33.FourDigit thinking...(Ctl-C to quit)"
+print("Starting HT16K33.FourDigit thinking...(Ctl-C to quit)")
 while True: # Forever loop
   try:
     # Prototype multiplier
@@ -27,10 +29,10 @@ while True: # Forever loop
   
   # Catch exit, and turn off device
   except (KeyboardInterrupt,SystemExit):
-    print "terminating....",
+    print("terminating....", end="")
     digit.clear().turnOffOscillator()
     time.sleep(0.1)
-    print "done"
+    print("done")
     break
   # Anything else, quit forever loop
   except:

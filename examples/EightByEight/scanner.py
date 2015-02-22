@@ -3,8 +3,10 @@
 # EightByEight - Scanner 
 # An example of horizontal & vertical lines osculating accross a 8x8 field
 
-from HT16K33 import EightByEight
+from __future__ import print_function
 import time
+
+from HT16K33 import EightByEight
 
 position  = 0 # Placement cursor
 direction = 1 # Signed direction to increment (+/-)
@@ -12,7 +14,7 @@ matrix = EightByEight().setUp() # Init device
 column_value = matrix.COLUMN_VALUES[position] # Assign first postion of column
 
 # Inform user
-print "Starting HT16K33.EightByEight scanner...(Ctl-C to quit)"
+print("Starting HT16K33.EightByEight scanner...(Ctl-C to quit)")
 while True: # Forever loop
   try:
     # Loop through 8x8 field
@@ -41,11 +43,11 @@ while True: # Forever loop
   
   # Catch exit, and turn off device
   except (KeyboardInterrupt,SystemExit):
-    print "terminating....",
+    print( "terminating....", end="" )
     matrix.clear().turnOffOscillator()
-    print "done"
+    print( "done" )
     break
   # Anything else, quit forever loop
   except:
-    print "Unknown expected exception..."
+    print( "Unknown expected exception..." )
     break
