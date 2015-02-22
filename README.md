@@ -50,6 +50,15 @@ Build and install python2's SMBus
     $ python setup.py build
     $ python setup.py install
 
+### Enable I2C Module
+
+Add the following lines to `/etc/modules`:
+
+    i2c-bcm2708
+    i2c-dev
+
+Reboot.
+
 ## Usage
 
 Connect i2c device, and identify address.
