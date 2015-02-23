@@ -1,4 +1,4 @@
-from _HT16K33 import Device
+from ._HT16K33 import Device
 
 
 __all__ = ['FourDigit']
